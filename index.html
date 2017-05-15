@@ -108,11 +108,13 @@ var check = function(){
 	//alert win
 	if(finished){
 		window.alert("Congratulations, you won and saved the president!");
+		var audio = new Audio("assets/sounds/applause.mp3");audio.play();
 	}
 	
 	//7 errors alert
 	if(mistake === 7){
 		window.alert("Oh no! You lost! The president will be blended...");
+		var audio = new Audio("assets/sounds/blender.mp3");audio.play();
 	}
 }
 
