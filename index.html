@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en-us">
+<meta name="viewport" content="640px", initial-scale="1">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Hangman - blender style</title>
+  <link href="https://fonts.googleapis.com/css?family=Bowlby+One+SC|Chewy|Didact+Gothic|Fredoka+One|Nunito+Sans" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+
+<body>
+
+<h1>Hangman - blender style</h1>
+<h2>Win, or the president gets blended!</h2>
+<p id="guessline"></p>
+<form name="guessbox">
+<input name="try" type="text" size="3" maxlength="1" id="guess">
+<input name="guessbutton" type="button" value="Enter a letter in the box, then click here" onClick="check()" class="button">
+
+<p id="guessedletters">Letters that you have guessed wrong so far:</p>
+<img src="assets/images/trump.jpg" id="trump"><br />
+<input name="refresh" type="button" value="Click here to start a new game" onClick="location.reload()" class="button">
+</form>
+<script>
+var words = [
+["I","M","P","E","A","C","M","E","N","T"],
+["C","O","N","G","R","E","S","S"],
+["P","R","E","S","I","D","E","N","T"],
+["W","A","S","H","I","N","G","T","O","N"],
+["B","I","P","A","R","T","I","S","A","N"],
+["G","E","R","R","Y","M","A","N","D","E","R","I","G"],
+["F","I","L","I","B","U","S","T","E","R"],
+["N","O","M","I","N","A","T","I","O","N"],
+["I","N","C","U","M","B","E","N","T"],
+["P","R","O","T","E","S","T"],
+["E","L","E","C","T","I","O","N"],
+["S","E","N","A","T","O","R"],
+["I","N","V","E","S","T","I","G","A","T","I","O","N"],
+["A","U","T","O","R","I","T","A","R","I","A","N"],
+["C","O","R","R","U","P","T","I","O","N"],
+["D","E","C","E","P","T","I","O","N"],
+["D","I","C","T","A","T","O","R","S","I","P"],
+["H","Y","P","O","C","R","I","S","Y"],
+["R","E","S","I","G","N","A","T","I","O","N"],
+["S","C","A","N","D","A","L"],
+["D","E","M","A","G","O","G","U","E"],
+]
+
+//choosing word randomly
+var random = Math.floor((Math.random()*(words.length-1))); 
+
+var solution = words[random];
+var guessword = new Array(solution.length);
+var mistake = 0;
+
+//underscore for every letter in the word
+for (var i = 0; i < guessword.length; i++){
+	guessword[i] = "_ ";
+}
+
+//guesses in the box
+function printguessword(){
+	for (var i = 0; i < guessword.length; i++){
+	var guessline = document.getElementById("guessline");
+	var letter = document.createTextNode(guessword[i]);
+	guessline.appendChild(letter);
+	}
+}
+
+//checking if provided letter is in word
+var check = function(){
+	var f = document.guessbox; 
+	var b = f.elements["try"]; 
+	var guessletter = b.value;
+	//letter input
+	guessletter = guessletter.toUpperCase();
+	for (var i = 0; i < solution.length; i++){
+		if(solution[i] === guessletter){
+			guessword[i] = guessletter + " ";
+			var hit = true;
+		}
+	b.value = "";
+	}
+	
+	//new letter in box
+	var guessline = document.getElementById("guessline");
+	guessline.innerHTML=""; 
+	printguessword();
+	
+	//wrong lettes list and trump images change
+	if(!hit){
+		var guessedletters = document.getElementById("guessedletters");
+		var letter = document.createTextNode(" " + guessletter);
+		guessedletters.appendChild(letter); 
+		mistake++;
+		var trump = document.getElementById("trump");
+    trump.src = "assets/images/trump" + mistake + ".jpg";
+	}
+	
+	//checks if all letters have been found
+	var finished = true;
+	for (var i = 0; i < guessword.length; i++){
+		if(guessword[i] === "_ "){
+			finished = false;
+		}
+	}
+	//alert win
+	if(finished){
+		window.alert("Congratulations, you won and saved the president!");
+	}
+	
+	//7 errors alert
+	if(mistake === 7){
+		window.alert("Oh no! You lost! The president will be blended...");
+	}
+}
+
+function init(){
+	printguessword();
+}
+
+window.onload = init;
+</script>
+<footer>
+    <img src="assets/images/whitehouse.png" class="container">
+      
+    
+  </footer>
+</body>

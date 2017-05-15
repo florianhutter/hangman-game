@@ -1,0 +1,77 @@
+#trump {
+	width: 746px;
+	border-radius: 20px
+}
+
+body {
+	background-color: #abdd1e;
+	text-align: center;
+	font-family: 'Didact Gothic', sans-serif;
+}
+
+
+input {
+	font-size: 15px;
+	padding:5px;
+	border: 3px solid black;
+	font-family: 'Didact Gothic', sans-serif;
+	color: black;
+	background: #97CCE4;
+	border-radius: 7px;
+}
+
+#guess {
+	background: #D6ECF4;
+}
+
+#guessline {
+	font-family: 'Bowlby One SC', cursive;
+	font-size: 60px;
+	margin: 0;
+}
+
+.container {
+ 	width: 100%;
+ 	max-width: 200px;
+  	margin: 0 auto;
+  	margin-top: 30px;
+  	clear: both;
+}
+
+h1 {
+	font-family: 'Bowlby One SC', cursive;
+	font-size: 80px;
+	color: #202E6C;
+	margin-top: 10px;
+	margin-bottom: 0;
+}
+
+h2 {
+	margin-top: 20px;
+}
+
+@media (max-width: 1180px) {
+	h1 {
+		font-size: 50px;
+	}
+}
+
+@media (max-width: 753px) {
+
+  	#trump {
+   		width: 100%;
+	}
+	h1 {
+		font-size: 32px;
+	}
+	#guessline {
+		font-size: 40px;
+	}
+}
+
+
+
+
+
+    
+  }
